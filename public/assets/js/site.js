@@ -23,16 +23,26 @@ export async function loadPartials() {
 }
 
 export function initSharedUI({ enableScrollSpy = true } = {}) {
-  // Dark mode toggle
+  // Dark mode toggle with icon
   const root = document.documentElement;
   const btn = document.getElementById('darkToggle');
   if (btn) {
+    const iconSun = btn.querySelector('#icon-sun');
+    const iconMoon = btn.querySelector('#icon-moon');
     const stored = localStorage.getItem('bgawards.dark');
     if (stored === '1') root.classList.add('dark');
     const sync = () => {
       const dark = root.classList.contains('dark');
       btn.setAttribute('aria-pressed', dark);
-      btn.textContent = dark ? 'Light' : 'Dark';
+      if (iconSun && iconMoon) {
+        if (dark) {
+          iconSun.classList.remove('hidden');
+          iconMoon.classList.add('hidden');
+        } else {
+          iconSun.classList.add('hidden');
+          iconMoon.classList.remove('hidden');
+        }
+      }
     };
     sync();
     btn.addEventListener('click', () => {
