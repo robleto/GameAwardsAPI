@@ -5,7 +5,12 @@ A RESTful API for board game awards data (an OMDB-style service for tabletop). P
 > Commercial deployment asset. Not an open contribution project.
 ## 🚀 Deployment & Operations
 
-Production reference stack: Netlify (Functions + static) + Neon (Postgres) + Stripe (subscriptions). Detailed deployment, Neon, Stripe, and quick start guides now live under `docs/technical/`.
+Production reference stack: Netlify (Functions + static) + Neon (Postgres) + Stripe (subscriptions). 
+
+**📁 Documentation Structure:**
+- 📖 **[API Documentation](docs/api/)** - Endpoints, authentication, examples
+- 🚀 **[Deployment Guides](docs/deployment/)** - Netlify, Neon, Stripe setup
+- 🔧 **[Scripts Directory](scripts/)** - Utilities, tests, and automation
 
 Fast path:
 ```bash
@@ -16,7 +21,7 @@ Netlify UI basics:
   Add required env vars (`DATABASE_URL`, Stripe keys, etc.)
 ```
 
-Migration from Supabase? See the "Migration & Legacy Notes" section inside `DEPLOYMENT.md` (Supabase env removal + Neon connection format) – prior separate docs were consolidated.
+Migration from Supabase? See the [Migration Guide](docs/deployment/NEON-MIGRATION.md) for Supabase env removal and Neon connection format.
 
 ### Local Development
 
@@ -36,14 +41,14 @@ The dataset includes major awards like Spiel des Jahres, Origins Awards, Diana J
 npm install
 npm run dev          # Express + auto-reload
 # or test serverless functions directly
-node local-functions-server.js &
+node scripts/local-functions-server.js &
 node scripts/run-function.js api "s=wingspan&apikey=demo"
 ```
 
 Stripe test bootstrap (optional now, required before subscriptions):
 ```bash
 cp .env.example .env   # fill DATABASE_URL + Stripe keys
-node setup-stripe-products.js
+node scripts/setup-stripe-products.js
 # add printed price + webhook secrets to Netlify env and redeploy
 ```
 
@@ -172,9 +177,9 @@ Each award object contains:
 - Helmet security headers via Express fallback
 - Planned: peppered key hashing (`API_KEY_SECRET`), narrower CORS
 
-## 📈 Key Environment Variables (excerpt)
+## 📈 Key Environment Variables
 
-See full matrix in `docs/technical/DEPLOYMENT.md` (populate for buyer handoff).
+See the complete environment setup guide in [docs/deployment/DEPLOYMENT.md](docs/deployment/DEPLOYMENT.md).
 ```env
 DATABASE_URL=postgresql://...?...sslmode=require
 STRIPE_SECRET_KEY=sk_test_...
@@ -225,8 +230,6 @@ See `LICENSE-COMMERCIAL.md`.
 ## 📞 Support
 
 - 📧 Email: support@gameawardsapi.com
-- 🐛 Issues: [GitHub Issues](https://github.com/your-repo/issues)
-- 💬 Discord: [Board Game Developers](https://discord.gg/boardgamedev)
 
 ---
 

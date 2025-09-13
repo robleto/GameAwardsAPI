@@ -32,7 +32,18 @@ dev-scripts/
 docs-archive/
 database-archive/
 internal/
+
+# Business documentation (keep private)
 docs/business/
+
+# Development artifacts
+scripts/test-*.js
+scripts/demo-*.js
+scripts/VERSION
+build-info.json
+
+# Legacy documentation
+docs/technical/
 
 # Build artifacts
 build-info.json
